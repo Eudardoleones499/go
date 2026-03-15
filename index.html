@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Переход...</title>
+    <title>Загрузка...</title>
     <style>
-        body { background: #121212; color: white; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
-        .btn { background: #007AFF; color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 4px 15px rgba(0,122,255,0.3); }
-        .container { padding: 20px; }
-        p { opacity: 0.8; font-size: 14px; margin-bottom: 20px; }
+        body { background: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .ios-only { display: none; text-align: center; }
+        .btn { background: #007AFF; color: #fff; padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p>Для безопасного просмотра контента нажмите кнопку ниже:</p>
-        <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" class="btn">ОТКРЫТЬ В БРАУЗЕРЕ</a>
+
+    <div id="ios-ui" class="ios-only">
+        <p>Для продолжения нажмите на кнопку:</p><br>
+        <a href="https://www.google.com" target="_blank" class="btn">ОТКРЫТЬ В БРАУЗЕРЕ</a>
     </div>
 
     <script>
-        // Дополнительный триггер: если юзер просто ждет, пробуем фоновый редирект
-        setTimeout(function() {
-            window.location.href = "https://www.google.com/";
-        }, 5000);
+        var url = "https://www.google.com";
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+        if (isIOS) {
+            // Показываем кнопку для iPhone
+            document.getElementById('ios-ui').style.display = 'block';
+        } else {
+            // Шлем Android через Intent (авто-выброс)
+            var intentUrl = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+            window.location.replace(intentUrl);
+            
+            // Если не сработало за 1 сек - обычный редирект
+            setTimeout(function() { window.location.href = url; }, 1000);
+        }
     </script>
 </body>
 </html>
